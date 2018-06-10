@@ -22,7 +22,7 @@ const PostReducer = (state = initialState, action) => {
 
     case EDIT_POST:
       return {
-        data: state.data.map(post => { return post.cuid === action.cuid ? Object.assign({}, post, action.post) : post }),
+        data: state.data.map(post => { return post.cuid === action.cuid ? Object.assign({}, post, action.post) : post; }),
       };
 
     default:

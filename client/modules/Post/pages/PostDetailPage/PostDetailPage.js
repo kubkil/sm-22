@@ -30,7 +30,7 @@ export class PostDetailPage extends React.Component {
     this.setState({
       [name]: value,
     });
-  };
+  }
 
   handleEditPost = () => {
     this.props.toggleEditPost();
@@ -47,7 +47,7 @@ export class PostDetailPage extends React.Component {
         <a className={styles['post-submit-button']} href="#" onClick={this.handleEditPost}><FormattedMessage id="submit" /></a>
       </div>
     );
-  };
+  }
 
   renderPost = () => {
     return (
@@ -57,7 +57,7 @@ export class PostDetailPage extends React.Component {
         <p className={styles['post-desc']}>{this.props.post.content}</p>
       </div>
     );
-  };
+  }
 
   render() {
     return (
