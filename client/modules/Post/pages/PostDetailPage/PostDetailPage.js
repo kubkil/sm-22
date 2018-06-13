@@ -7,7 +7,7 @@ import { injectIntl, FormattedMessage } from 'react-intl';
 import styles from '../../components/PostListItem/PostListItem.css';
 
 // Import Actions
-import { fetchPost, editPostRequest } from '../../PostActions';
+import { fetchPost, editPostRequest, thumbUp, editThumbUp } from '../../PostActions';
 import { toggleEditPost } from '../../../App/AppActions';
 
 // Import Selectors
@@ -21,6 +21,7 @@ export class PostDetailPage extends React.Component {
       name: this.props.post.name,
       title: this.props.post.title,
       content: this.props.post.content,
+      voteCount: this.props.post.voteCount,
     };
   }
 
@@ -35,6 +36,11 @@ export class PostDetailPage extends React.Component {
   handleEditPost = () => {
     this.props.toggleEditPost();
     this.props.editPostRequest(this.state);
+  }
+
+  handleThumbUp = () => {
+    this.props.thumbUp();
+    this.props.editThumbUp(this.state);
   }
 
   renderPostForm = () => {
@@ -55,6 +61,9 @@ export class PostDetailPage extends React.Component {
         <h3 className={styles['post-title']}>{this.props.post.title}</h3>
         <p className={styles['author-name']}><FormattedMessage id="by" /> {this.props.post.name}</p>
         <p className={styles['post-desc']}>{this.props.post.content}</p>
+        <span>Votes: {this.props.post.voteCount}</span>
+        <button onClick={this.handleThumbUp}>UP</button>
+        <button onClick={this.handleThumbDown}>DOWN</button>
       </div>
     );
   }
@@ -84,6 +93,8 @@ function mapDispatchToProps(dispatch, props) {
   return {
     toggleEditPost: () => dispatch(toggleEditPost()),
     editPostRequest: (post) => dispatch(editPostRequest(props.params.cuid, post)),
+    thumbUp: () => dispatch(thumbUp(props.params.cuid)),
+    editThumbUp: (post) => dispatch(editThumbUp(props.params.cuid, post)),
   };
 }
 
@@ -98,6 +109,7 @@ PostDetailPage.propTypes = {
   post: PropTypes.shape({
     name: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
+    voteCount: PropTypes.number.isRequired,
     content: PropTypes.string.isRequired,
     slug: PropTypes.string.isRequired,
     cuid: PropTypes.string.isRequired,
@@ -112,7 +124,8 @@ PostDetailPage.propTypes = {
   showEditPost: PropTypes.bool.isRequired,
   toggleEditPost: PropTypes.func.isRequired,
   editPostRequest: PropTypes.func.isRequired,
+  thumbUp: PropTypes.func.isRequired,
+  editThumbUp: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(PostDetailPage));
-
