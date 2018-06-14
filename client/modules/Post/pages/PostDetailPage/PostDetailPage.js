@@ -7,7 +7,7 @@ import { injectIntl, FormattedMessage } from 'react-intl';
 import styles from '../../components/PostListItem/PostListItem.css';
 
 // Import Actions
-import { fetchPost, editPostRequest, thumbUp, editThumbUp } from '../../PostActions';
+import { fetchPost, editPostRequest, thumbUp, editThumbUp, thumbDown, editThumbDown } from '../../PostActions';
 import { toggleEditPost } from '../../../App/AppActions';
 
 // Import Selectors
@@ -39,8 +39,11 @@ export class PostDetailPage extends React.Component {
   }
 
   handleThumbUp = () => {
-    this.props.thumbUp();
     this.props.editThumbUp(this.state);
+  }
+
+  handleThumbDown = () => {
+    this.props.editThumbDown(this.state);
   }
 
   renderPostForm = () => {
@@ -95,6 +98,8 @@ function mapDispatchToProps(dispatch, props) {
     editPostRequest: (post) => dispatch(editPostRequest(props.params.cuid, post)),
     thumbUp: () => dispatch(thumbUp(props.params.cuid)),
     editThumbUp: (post) => dispatch(editThumbUp(props.params.cuid, post)),
+    thumbDown: () => dispatch(thumbDown(props.params.cuid)),
+    editThumbDown: (post) => dispatch(editThumbDown(props.params.cuid, post)),
   };
 }
 
@@ -126,6 +131,7 @@ PostDetailPage.propTypes = {
   editPostRequest: PropTypes.func.isRequired,
   thumbUp: PropTypes.func.isRequired,
   editThumbUp: PropTypes.func.isRequired,
+  editThumbDown: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(PostDetailPage));
