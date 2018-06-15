@@ -35,6 +35,7 @@ export function addPost(req, res) {
   newPost.title = sanitizeHtml(newPost.title);
   newPost.name = sanitizeHtml(newPost.name);
   newPost.content = sanitizeHtml(newPost.content);
+  newPost.voteCount = 0;
 
 
   newPost.slug = slug(newPost.title.toLowerCase(), { lowercase: true });
@@ -104,7 +105,7 @@ export function editPost(req, res) {
  */
 
 export function thumbUp(req, res) {
-  Post.update({ cuid: req.params.cuid }, req.body.post.voteCount).exec((err, voteCount) => {
+  Post.update({ cuid: req.params.cuid }, { voteCount: req.body.post.voteCount }).exec((err, voteCount) => {
     if (err) {
       res.status(500).send(err);
     }
@@ -120,7 +121,7 @@ export function thumbUp(req, res) {
  */
 
 export function thumbDown(req, res) {
-  Post.update({ cuid: req.params.cuid }, req.body.post.voteCount).exec((err, voteCount) => {
+  Post.update({ cuid: req.params.cuid }, { voteCount: req.body.post.voteCount }).exec((err, voteCount) => {
     if (err) {
       res.status(500).send(err);
     }

@@ -92,7 +92,7 @@ export function thumbUp(cuid) {
 
 export function editThumbUp(cuid, post) {
   return (dispatch) => {
-    return callApi(`posts/${cuid}`, 'put', {
+    return callApi(`posts/tu/${cuid}`, 'put', {
       post: {
         voteCount: post.voteCount,
       },
@@ -109,7 +109,7 @@ export function thumbDown(cuid) {
 
 export function editThumbDown(cuid, post) {
   return (dispatch) => {
-    return callApi(`posts/${cuid}`, 'put', {
+    return callApi(`posts/td/${cuid}`, 'put', {
       post: {
         voteCount: post.voteCount,
       },
