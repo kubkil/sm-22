@@ -105,7 +105,7 @@ export function editPost(req, res) {
  */
 
 export function thumbUp(req, res) {
-  Post.update({ cuid: req.params.cuid }, { voteCount: req.body.voteCount }).exec((err, voteCount) => {
+  Post.update({ cuid: req.params.cuid }, { voteCount: req.body.post.voteCount }).exec((err, voteCount) => {
     if (err) {
       res.status(500).send(err);
     }
@@ -121,7 +121,7 @@ export function thumbUp(req, res) {
  */
 
 export function thumbDown(req, res) {
-  Post.update({ cuid: req.params.cuid }, { voteCount: req.body.voteCount }).exec((err, voteCount) => {
+  Post.update({ cuid: req.params.cuid }, { voteCount: req.body.post.voteCount }).exec((err, voteCount) => {
     if (err) {
       res.status(500).send(err);
     }
