@@ -40,5 +40,13 @@ export default (
         });
       }}
     />
+    <Route
+      path="/home"
+      getComponent={(nextState, cb) => {
+        require.ensure([], require => {
+          cb(null, require('./modules/Home/Home').default);
+        });
+      }}
+    />
   </Route>
 );
