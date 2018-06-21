@@ -4,6 +4,12 @@
   border-bottom: 1px solid #ccc;
 }
 
+.navbar {
+  display: flex;
+  justify-content: center;
+  padding-top: 5rem;
+}
+
 .content {
   width: 100%;
   max-width: 980px;
