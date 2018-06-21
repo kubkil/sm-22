@@ -1,1 +1,6 @@
 /* Home styles */
+.header {
+    margin: 20px 0;
+    padding: 15px;
+    text-align: center;
+}
